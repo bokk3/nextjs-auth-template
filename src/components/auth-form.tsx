@@ -8,10 +8,12 @@ export function AuthForm() {
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [isSignUp, setIsSignUp] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { data: session, isPending } = useSession()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
     
     try {
       if (isSignUp) {
@@ -26,8 +28,12 @@ export function AuthForm() {
           password,
         })
       }
+      // Redirect to admin after successful login
+      window.location.href = "/admin"
     } catch (error) {
       console.error("Auth error:", error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -100,9 +106,10 @@ export function AuthForm() {
         
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          disabled={isSubmitting}
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSignUp ? "Sign Up" : "Sign In"}
+          {isSubmitting ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
         </button>
       </form>
       

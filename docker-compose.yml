@@ -4,9 +4,9 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
-    container_name: reinart-postgres
+    container_name: nextjs-auth-postgres
     environment:
-      POSTGRES_DB: reinart_v3
+      POSTGRES_DB: nextjs_auth_template
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -24,14 +24,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: reinart-app
+    container_name: nextjs-auth-app
     ports:
       - "3000:3000"
     env_file:
       - .env.local
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/reinart_v3
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nextjs_auth_template
     depends_on:
       postgres:
         condition: service_healthy

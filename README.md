@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Auth Template
 
-## Getting Started
+A production-ready authentication template built with Next.js 16, Better Auth, Prisma, and Docker.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Stack**: Next.js 16 with App Router, TypeScript, Tailwind CSS
+- **Secure Authentication**: Better Auth with email/password and social providers
+- **Database**: Prisma ORM with PostgreSQL
+- **Containerized**: Docker Compose for development and production
+- **Protected Routes**: Admin dashboard with session management
+- **Responsive Design**: Mobile-first with dark mode support
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── app/                 # Next.js App Router pages
+│   │   ├── login/          # Authentication page
+│   │   ├── admin/          # Protected admin dashboard
+│   │   └── api/auth/       # Better Auth API routes
+│   ├── components/         # React components
+│   └── lib/               # Auth configuration and utilities
+├── prisma/                # Database schema and migrations
+├── scripts/               # Utility scripts
+└── docker-compose.yml     # Container orchestration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone and setup:**
+   ```bash
+   git clone <this-repo>
+   cd nextjs-auth-template
+   cp .env.local.example .env.local
+   # Edit .env.local and add your BETTER_AUTH_SECRET
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Start development:**
+   ```bash
+   docker-compose up -d postgres
+   npm install
+   npx prisma db push
+   npm run clear-and-seed
+   npm run dev
+   ```
 
-## Learn More
+3. **Access the application:**
+   - Homepage: http://localhost:3000
+   - Login: http://localhost:3000/login
+   - Admin: http://localhost:3000/admin
+   - Default admin: admin@example.com / admin123
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ Creating Client Projects
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Use the project generator to create customized versions for clients:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+node scripts/create-project.js acme-corp "Acme Corporation"
+```
 
-## Deploy on Vercel
+This will:
+- Create a new project directory with the client name
+- Replace all template variables with client-specific values
+- Generate a custom README and configuration
+- Set up client-specific database and container names
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🐳 Docker Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [DOCKER.md](DOCKER.md) for detailed deployment instructions.
+
+## 🔧 Environment Variables
+
+Required variables in `.env.local`:
+
+```env
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nextjs_auth_template
+BETTER_AUTH_SECRET=your-secret-here
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+## 📝 License
+
+MIT License - feel free to use for client projects.
