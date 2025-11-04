@@ -21,7 +21,7 @@ sleep 5
 
 # Run database setup
 echo "🗄️  Setting up database..."
-docker-compose exec postgres psql -U postgres -d reinart_v3 -c "SELECT 1;" > /dev/null 2>&1
+docker-compose exec postgres psql -U postgres -d nextjs_auth_template -c "SELECT 1;" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "✅ Database is ready"
 else

@@ -7,14 +7,14 @@ async function createAdmin() {
     // Use Better Auth to create the admin user properly
     const result = await auth.api.signUpEmail({
       body: {
-        email: 'admin@reinart.com',
+        email: 'admin@example.com',
         password: 'admin123',
         name: 'Admin User'
       }
     })
 
     console.log('✅ Admin account created successfully!')
-    console.log('📧 Email: admin@reinart.com')
+    console.log('📧 Email: admin@example.com')
     console.log('🔑 Password: admin123')
     
   } catch (error: any) {
