@@ -45,7 +45,7 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("account")
+  @@map("accounts")
 }
 
 model Session {
@@ -59,7 +59,7 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("session")
+  @@map("sessions")
 }
 
 model Verification {
@@ -70,5 +70,5 @@ model Verification {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("verification")
+  @@map("verifications")
 }
